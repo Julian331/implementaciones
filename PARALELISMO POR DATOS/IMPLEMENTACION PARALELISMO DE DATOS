@@ -1,0 +1,35 @@
+import kotlinx.coroutines.*
+import kotlin.system.measureTimeMillis
+
+fun main() = runBlocking {
+    val tiempo = measureTimeMillis {
+        val resultados = (1..4).map { numero ->
+            async {
+                delay(500L) 
+                numero * numero
+            }
+        }.awaitAll()
+        println("Resultados: $resultados")
+    }
+    println("Tiempo total: $tiempo ms")
+}
+
+// RESULTADO
+
+Resultados: [1, 4, 9, 16]
+Tiempo total: ~500 ms
+
+// COMPARACION
+
+val tiempo = measureTimeMillis {
+    val resultados = (1..4).map {
+        Thread.sleep(500L)
+        it * it
+    }
+    println("Resultados: $resultados")
+}
+println("Tiempo total: $tiempo ms")
+
+//RESULTADO
+
+Tiempo total: ~2000 ms
