@@ -1,0 +1,25 @@
+import kotlinx.coroutines.*
+
+var contador = 0 // 
+
+fun main() = runBlocking {
+    val jobs = List(1000) {
+        launch {
+            repeat(1000) {
+                contador++ // 
+            }
+        }
+    }
+
+    jobs.forEach { it.join() }
+    println("Valor final del contador: $contador")
+}
+
+
+// RESULTADO ESPERADO (INCORRECTO):
+
+Valor final del contador: 1_000_000 ❌ (no se alcanza)
+
+// ERORR TIPICO PERO REAL:
+
+Valor final del contador: 845723, 902134, etc.
