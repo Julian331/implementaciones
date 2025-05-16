@@ -1,0 +1,20 @@
+import kotlinx.coroutines.*
+
+var contador = 0 
+
+fun main() = runBlocking {
+    val jobs = List(1000) {
+        launch {
+            repeat(1000) {
+                contador++
+            }
+        }
+    }
+
+    jobs.forEach { it.join() }
+    println("Contador final: $contador")
+}
+
+// SALIDA ESPERADA
+Esperado: 1000000
+Real: 801237, 934518, etc.
