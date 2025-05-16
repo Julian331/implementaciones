@@ -1,0 +1,16 @@
+import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    val job1 = launch {
+        delay(1000L)
+        println("Descargando archivo...")
+    }
+
+    val job2 = launch {
+        delay(500L)
+        println("Procesando archivo...")
+    }
+
+    joinAll(job1, job2)
+    println("Tareas completadas")
+}
