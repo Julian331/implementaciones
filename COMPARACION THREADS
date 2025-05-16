@@ -1,4 +1,0 @@
-fun main() {
-    Thread.sleep(1000)
-    println("Esperé 1 segundo")
-}
